@@ -98,7 +98,6 @@ public class ForecastFragment extends Fragment {
             // so that they can be closed in the finally block.
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
-            alksjsdndfljks
 
             // Will contain the raw JSON response as a string.
             String forecastJsonStr = null;
