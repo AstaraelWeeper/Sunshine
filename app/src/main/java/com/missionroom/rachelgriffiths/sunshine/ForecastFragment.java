@@ -1,6 +1,7 @@
 package com.missionroom.rachelgriffiths.sunshine;
 
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -99,14 +100,32 @@ public class ForecastFragment extends Fragment {
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
 
-            // Will contain the raw JSON response as a string.
+            // Will contain the raw JSON response as a string. Also intialise values for URL builder
             String forecastJsonStr = null;
+            String format = "json";
+            String units = "metric";
+            int numDays = 7;
 
             try {
                 // Construct the URL for the OpenWeatherMap query
-                // Possible parameters are avaiable at OWM's forecast API page, at
-                // http://openweathermap.org/API#forecast
-                URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7");
+               // replaced by URL builder below // URL url = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=94043&mode=json&units=metric&cnt=7");
+                 final String FORECAST_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?";
+                 final String QUERY_PARAM = "q"; //these variables are used in teh HTML address bar to search for those attributes. Q is for postcode
+                 final String FORMAT_PARAM = "mode"; //for the json format
+                 final String UNITS_PARAM = "units";
+                 final String DAYS_PARAM = "cnt";
+
+                 Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
+                         .appendQueryParameter(QUERY_PARAM, params [0])
+                         .appendQueryParameter(FORMAT_PARAM, format)
+                         .appendQueryParameter(UNITS_PARAM, units)
+                         .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                         .build(); //adds all the bits onto the base URL
+
+                 URL url = new URL (builtUri.toString());
+
+                 Log.v(LOG_TAG,"Built URI" + builtUri.toString() );
+
 
                 // Create the request to OpenWeatherMap, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
