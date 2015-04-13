@@ -53,15 +53,16 @@ public class ForecastFragment extends Fragment {
         inflater.inflate(R.menu.forecastfragment, menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        int id = item.getItemId(); //update data on clicking refresh
         if (id == R.id.action_refresh) {
             FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("94043");
+            weatherTask.execute("Nottingham");
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -70,6 +71,7 @@ public class ForecastFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         // Create some dummy data for the ListView.  Here's a sample weekly forecast
         String[] data = {
@@ -112,8 +114,8 @@ public class ForecastFragment extends Fragment {
         private String getReadableDateString(long time){
             // Because the API returns a unix timestamp (measured in seconds),
             // it must be converted to milliseconds in order to be converted to valid date.
-            SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
-            return shortenedDateFormat.format(time);
+            SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd"); //initialise new datetime.
+            return shortenedDateFormat.format(time); //return time, formatted into new datetime.
         }
 
         /**
@@ -124,7 +126,7 @@ public class ForecastFragment extends Fragment {
             long roundedHigh = Math.round(high);
             long roundedLow = Math.round(low);
 
-            String highLowStr = roundedHigh + "/" + roundedLow;
+            String highLowStr = roundedHigh + "/" + roundedLow; //displays max/min
             return highLowStr;
         }
 
@@ -195,7 +197,7 @@ public class ForecastFragment extends Fragment {
                 double low = temperatureObject.getDouble(OWM_MIN);
 
                 highAndLow = formatHighLows(high, low);
-                resultStrs[i] = day + " - " + description + " - " + highAndLow;
+                resultStrs[i] = day + " - " + description + " - " + highAndLow; // end day, weather and temp printed to screen
             }
 
             for (String s : resultStrs) {
@@ -302,6 +304,17 @@ public class ForecastFragment extends Fragment {
 
             // This will only happen if there was an error getting or parsing the forecast.
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] result){
+            if (result != null){
+                mForecastAdapter.clear();
+                for (String dayForecastStr:result){
+                    mForecastAdapter.add(dayForecastStr);
+                }
+
+            }
         }
     }
 }
