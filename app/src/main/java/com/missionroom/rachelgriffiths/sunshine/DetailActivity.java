@@ -1,9 +1,9 @@
 package com.missionroom.rachelgriffiths.sunshine;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +12,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-public class DetailActivity extends ActionBarActivity {
+public class DetailActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            getFragmentManager().beginTransaction()
                     .add(R.id.container, new DetailFragment())
                     .commit();
         }
@@ -65,7 +65,7 @@ public class DetailActivity extends ActionBarActivity {
             Intent intent  = getActivity().getIntent();
             if (intent !=null && intent.hasExtra(Intent.EXTRA_TEXT)){
                 String forecastStr = intent.getStringExtra(Intent.EXTRA_TEXT);
-                ((TextView) rootView.findViewById(R.id.detail_text)).setText(forecastStr);
+                ((TextView) rootView.findViewById(R.id.detail_text)).setText(forecastStr); //linking the text from the intent to the TextView in fragment_detail.xml
 
             }
 
