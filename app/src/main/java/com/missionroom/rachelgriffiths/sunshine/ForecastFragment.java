@@ -295,6 +295,7 @@ public class ForecastFragment extends Fragment {
                 }
             }
 
+
             try {
                 return getWeatherDataFromJson(forecastJsonStr, numDays);
             } catch (JSONException e) {
