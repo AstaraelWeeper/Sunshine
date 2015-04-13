@@ -252,6 +252,7 @@ public class ForecastFragment extends Fragment {
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
+                Log.v(LOG_TAG, "Connected");
 
                 // Read the input stream into a String
                 InputStream inputStream = urlConnection.getInputStream();
@@ -261,6 +262,7 @@ public class ForecastFragment extends Fragment {
                     return null;
                 }
                 reader = new BufferedReader(new InputStreamReader(inputStream));
+                Log.v(LOG_TAG, "buffered");
 
                 String line;
                 while ((line = reader.readLine()) != null) {
