@@ -80,13 +80,6 @@ public class ForecastFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FetchWeatherTask initialWeatherTask = new FetchWeatherTask();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String location = prefs.getString(getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default));//get string, first parameter is getting a string of the key, second is getting the string of default
-        initialWeatherTask.execute(location);
-
-
 
 
         // Create some dummy data for the ListView.  Here's a sample weekly forecast
@@ -123,7 +116,7 @@ public class ForecastFragment extends Fragment {
         @Override
         public void onItemClick (AdapterView<?> adapterView, View view, int position, long l) {
 
-             //implement Detail Activity using the tapped on day's forecast
+             //implement what you want . Use mForecastAdapter.getItem(position)
                 String forecast = mForecastAdapter.getItem(position);
                 Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
                 startActivity(intent);
