@@ -8,8 +8,24 @@
     <string name = "title_activity_settings">Settings</string>
 
     <!--Settings strings-->
+    <!--location-->
     <string name="pref_location_label">Location</string>
     <string name="pref_location_default" translatable = "false" >Nottingham</string>
     <string name="pref_location_key" translatable = "false" >location</string>
+    <!--metric/imperial-->
+    <string name="pref_units_label">Units Label</string>
+    <string name = "pref_units_key">Temperature Units</string>
+    <string name="pref_units_metric">Metric</string>
+
+
+    <string-array name="pref_units_values">
+        <item name = "metric" > Metric </item>
+        <item name = "imperial"> Imperial </item>
+    </string-array>
+
+    <string-array name="pref_units_options">
+        <item name = "metric" > Metric </item>
+        <item name = "imperial"> Imperial </item>
+    </string-array>
 
 </resources>
