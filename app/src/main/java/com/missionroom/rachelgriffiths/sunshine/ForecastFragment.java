@@ -103,13 +103,13 @@ public class ForecastFragment extends Fragment {
         // Get a reference to the ListView, and attach this adapter to it.
         ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
         listView.setAdapter(mForecastAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
         //lesson 3 code, hopefully this will not jut disappear this time.
         //putting in onclick item event
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        @Override
+        public void onItemClick (AdapterView<?> adapterView, View view, int position, long l) {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
              //implement what you want . Use mForecastAdapter.getItem(position)
                 String forecast = mForecastAdapter.getItem(position);
                 Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
