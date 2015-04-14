@@ -34,6 +34,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+        //code to load the preferences from the settings xml
+        addPreferencesFromResource(R.xml.pref_general);
+        //code to load the below method
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_location_key)));
     }
 
     //this is to attach a listener to preferences so that the summary gets updated

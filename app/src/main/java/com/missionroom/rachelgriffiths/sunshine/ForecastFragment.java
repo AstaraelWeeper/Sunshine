@@ -2,9 +2,11 @@ package com.missionroom.rachelgriffiths.sunshine;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -62,10 +64,14 @@ public class ForecastFragment extends Fragment {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId(); //update data on clicking refresh
+        int id = item.getItemId(); //update data on clicking refresh. take location preference as parameter
         if (id == R.id.action_refresh) {
             FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("Nottingham");
+            //get current location preference
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String location = prefs.getString(getString(R.string.pref_location_key),
+                    getString(R.string.pref_location_default));//get string, first parameter is getting a string of the key, second is getting the string of default
+            weatherTask.execute(location);
             return true;
         }
         return super.onOptionsItemSelected(item);

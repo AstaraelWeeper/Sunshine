@@ -1,25 +1,14 @@
 <resources>
     <string name="app_name">Sunshine</string>
 
-    <string-array name="DaysViews">
-    <item name="weather_today">Today - Sunny - 88/63</item>
-    <item name="weather_tomoz">Tomorrow - Foggy - 70/46</item>
-    <item name="weather_wed">Wed - Sunny - 88/63</item>
-    <item name="weather_thur">Today - Wet -64/51</item>
-    <item name="weather_fri">Today - Sunny - 88/63</item>
-    <item name="weather_sat">Today - Cloudy - 88/63</item>
-    <item name="weather_sun">Today - Sunny - 88/63</item>
-</string-array>
-
-
     <string name="action_settings">Settings</string>
-    <string name="today_date">Today, April 9th</string>
-
-
     <string name="btn_refresh">Refresh</string>
 
-    <string name="hello_world">Hello world!</string>
-
     <string name="title_activity_detail">Details</string>
+
+    <!--Settings strings-->
+    <string name="pref_location_label">Location</string>
+    <string name="pref_location_default" translatable = "false" >Nottingham</string>
+    <string name="pref_location_key" translatable = "false" >location</string>
 
 </resources>
