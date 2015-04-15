@@ -12,4 +12,17 @@
     <string name="pref_location_default" translatable = "false" >Nottingham</string>
     <string name="pref_location_key" translatable = "false" >location</string>
 
+    <!--Temp units strings-->
+    <string name="pref_units_key">temperature</string>
+    <string name="pref_units_label">Temperature Units</string>
+    <string name = "pref_units_default">Metric</string>
+
+   <!--Temp units array strings-->
+    <string name="pref_units_label_metric">Celsius</string>
+    <string name="pref_units_label_imperial">Fahrenheit</string>
+
+    <string name="pref_units_metric">metric</string>
+    <string name="pref_units_imperial">imperial</string>
+.
+
 </resources>
