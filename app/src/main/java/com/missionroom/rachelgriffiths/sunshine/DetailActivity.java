@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 
@@ -55,8 +58,12 @@ public class DetailActivity extends Activity {
      * A placeholder fragment containing a simple view.
      */
     public static class DetailFragment extends Fragment {
+       private static final String LOG_TAG = DetailFragment.class.getSimpleName();
+        private String mForecastStr;
+
 
         public DetailFragment() {
+            setHasOptionsMenu(true);
         }
 
         @Override
@@ -66,13 +73,30 @@ public class DetailActivity extends Activity {
             //adding intent reading
             Intent intent  = getActivity().getIntent();
             if (intent !=null && intent.hasExtra(Intent.EXTRA_TEXT)){
-                String forecastStr = intent.getStringExtra(Intent.EXTRA_TEXT);
-                ((TextView) rootView.findViewById(R.id.detail_text)).setText(forecastStr); //linking the text from the intent to the TextView in fragment_detail.xml
+                mForecastStr = intent.getStringExtra(Intent.EXTRA_TEXT); //here and below forecastStr was replaced by mForecastStr
+                ((TextView) rootView.findViewById(R.id.detail_text)).setText(mForecastStr); //linking the text from the intent to the TextView in fragment_detail.xml to open the detailed forecast view
 
             }
 
 
             return rootView;
+        }
+
+        //new for lesson 3.13 - adding share provider to fragment
+
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            inflater.inflate(R.menu.detailfragment, menu);
+            //inflating to add items to the action bar
+            //retrieve share menu item
+            MenuItem menuItem = menu.findItem(R.id.action_share);
+
+            //get the provider
+            ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItem.getActionProvider(menuItem); //non static error.
+
+
+
+
         }
     }
 }

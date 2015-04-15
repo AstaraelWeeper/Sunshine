@@ -26,6 +26,10 @@
 
     <!--map strings -->
     <string name="action_map">Map Locations</string>
+
+    <!--share-->
+    <string name="action_share">Share</string>
+    <string name="hashtag">#SunshineApp</string>
 .
 
 </resources>
