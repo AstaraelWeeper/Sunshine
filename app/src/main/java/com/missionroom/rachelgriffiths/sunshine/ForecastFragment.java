@@ -156,7 +156,7 @@ public class ForecastFragment extends Fragment {
                 Log.d(LOG_TAG, "Unit type not found: " + unitType);
             }
 
-            //if celcius it skips straight to here
+            //if celsius it skips straight to here
 
 
 
