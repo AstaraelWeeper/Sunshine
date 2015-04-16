@@ -75,7 +75,7 @@ public class MainActivity extends Activity {
         //declare intent to open Action View, passing through the geo location
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        Intent.setData(geoLocation); //not working due to static
+        intent.setData(geoLocation);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);

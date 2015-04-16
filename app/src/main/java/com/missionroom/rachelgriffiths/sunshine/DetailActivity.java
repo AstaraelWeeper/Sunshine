@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -84,6 +83,15 @@ public class DetailActivity extends Activity {
 
         //new for lesson 3.13 - adding share provider to fragment
 
+        private Intent createShareForecastIntent(){
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT,
+                    mForecastStr + (getString(R.string.hashtag)));
+            return shareIntent;
+        }
+
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
             inflater.inflate(R.menu.detailfragment, menu);
@@ -92,10 +100,7 @@ public class DetailActivity extends Activity {
             MenuItem menuItem = menu.findItem(R.id.action_share);
 
             //get the provider
-            ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItem.getActionProvider(menuItem); //non static error.
-
-
-
+            ShareActionProvider mShareActionProvider = (ShareActionProvider) menuItem.getActionProvider(); //non static error - have removed MenuItem from the brackets.
 
         }
     }
