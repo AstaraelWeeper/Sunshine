@@ -2,12 +2,18 @@ package com.missionroom.rachelgriffiths.sunshine;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
 public class MainActivity extends Activity {
+
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +42,48 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            //add to call SettingsActivity.java
-            startActivity(new Intent(this,SettingsActivity.class));
-            return true;
+        switch (id) {
+            case (R.id.action_settings):
+                //add to call SettingsActivity.java
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+
+            case (R.id.action_map):
+                //call PreferredLocationInMap method
+                openPreferredLocationInMap();
+                return true;
+
+            default:
+                break;
 
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
+    private void openPreferredLocationInMap(){ //get the current location setting from Shared preferences
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String location = sharedPrefs.getString(
+               getString(R.string.pref_location_key),
+                getString(R.string.pref_location_default) );
+
+        //using a common URI builder to show a location on a map, adding the location at query point q
+        Uri geoLocation = Uri.parse("geo:0,0?").buildUpon()
+                .appendQueryParameter("q", location)
+                .build();
+
+        //declare intent to open Action View, passing through the geo location
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Log.d(LOG_TAG, "Couldn't call " + location + ", no receiving apps installed!");
+        }
+
+    }
 
 }
 
